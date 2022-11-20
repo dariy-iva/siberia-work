@@ -1,0 +1,193 @@
+<template>
+  <footer class="footer">
+    <div class="wrapper footer__columns">
+      <Logo className="footer__column footer__logo"/>
+      <ul class="footer__column footer__nav">
+        <li
+          v-for="link in navigationLinks"
+          :key="link.title">
+          <nuxt-link
+            :to="link.link"
+            no-prefetch
+            class="footer__nav-link">
+            {{ link.title }}
+          </nuxt-link>
+        </li>
+      </ul>
+      <p class="footer__column footer__copyright">
+        &copy; ООО «СИБИРЬ РАБОТАЕТ», 2022. Сообщения и материалы сетевого издания «СИБИРЬ РАБОТАЕТ» (зарегистрировано
+        Федеральной службой по надзору в сфере связи, информационных технологий и массовых коммуникаций (Роскомнадзор)
+        03.12.2022 за номером ЭЛ №ФС77-82385) сопровождаются пометкой «СИБИРЬ РАБОТАЕТ». Отдельные публикации могут
+        содержать информацию, не предназначенную для пользователей до 18 лет.</p>
+      <div class="footer__column footer__socials">
+        <button
+          type="button"
+          aria-label="open feedback form"
+          class="footer__feedback button-hover">
+          Написать нам
+        </button>
+        <SocialList :isLight="true"/>
+      </div>
+    </div>
+    <p class="footer__author">сделано в<span class="footer__author-logo"></span></p>
+  </footer>
+</template>
+
+<script>
+import Logo from "~/components/Logo";
+import SocialList from "~/components/SocialList";
+
+export default {
+  name: "Footer",
+
+  components: {
+    Logo,
+    SocialList
+  },
+
+  data() {
+    return {
+      navigationLinks: [
+        {
+          title: 'О редакции',
+          link: '/'
+        },
+        {
+          title: 'Популярное',
+          link: '/'
+        },
+        {
+          title: 'База контактов',
+          link: '/'
+        },
+        {
+          title: 'Новости',
+          link: '/'
+        },
+        {
+          title: 'Пользовательское соглашение',
+          link: '/'
+        },
+      ],
+    }
+  },
+}
+</script>
+
+<style scoped>
+.footer {
+  padding: 52px 0 15px;
+  background-color: var(--black-color);
+  box-sizing: border-box;
+}
+
+.footer__columns {
+  margin-bottom: 66px;
+  display: flex;
+}
+
+.footer__column:first-child, .footer__column:nth-child(2) {
+  margin-right: 9.6%;
+}
+
+.footer__column:last-child {
+  margin-left: auto;
+}
+
+.footer__logo {
+  min-width: 96px;
+  height: 31px;
+  background-image: url("../assets/images/logos/logo.svg");
+}
+
+.footer__nav {
+  margin: 0;
+  padding: 0;
+  max-width: 208px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  list-style-type: none;
+}
+
+.footer__nav-link {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: var(--middle-gray-color);
+  transition: color .3s;
+}
+
+.footer__nav-link:hover {
+  color: var(--primary-color);
+}
+
+.footer__copyright {
+  margin: 0;
+  max-width: 432px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.67;
+  color: var(--middle-gray-color);
+}
+
+.footer__socials {
+  max-width: 237px;
+  min-width: 190px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.footer__feedback {
+  padding: 12px 40px;
+  width: fit-content;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.62;
+  text-align: center;
+  color: var(--white-color);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.footer__feedback:hover {
+  color: var(--black-color);
+  background-color: var(--middle-gray-color);
+}
+
+.footer__author {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  color: var(--white-color);
+}
+
+.footer__author::after {
+  content: "";
+  display: block;
+  width: 15px;
+  height: 14px;
+  background: url("assets/images/icons/heart.svg") center / contain no-repeat;
+}
+
+.footer__author-logo {
+  display: block;
+  width: 91px;
+  height: 21px;
+  background: url("assets/images/logos/alente.svg") center / contain no-repeat;
+}
+
+</style>

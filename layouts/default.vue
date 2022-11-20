@@ -1,17 +1,22 @@
 <template>
   <div class="page">
     <Header/>
-    <Nuxt/>
+    <main class="content">
+      <Nuxt/>
+    </main>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import Header from "~/components/Header";
+import Footer from "~/components/Footer";
 
 export default {
   name: "default",
   components: {
     Header,
+    Footer
   },
   head () {
     return {
@@ -37,6 +42,7 @@ export default {
   flex-direction: column;
   min-height: 100vh;
   --black-color: #000;
+  --white-color: #fff;
   --primary-color: #5083F3;
   --light-gray-color: #EEF0F3;
   --middle-gray-color: #DCE2EA;
@@ -44,17 +50,24 @@ export default {
   --beige-color: #CBBFAF;
 }
 
+.content {
+  padding: calc(22px + 147px) 0 60px;
+  flex-grow: 1;
+}
+
 .wrapper {
   max-width: 1328px;
   margin: 0 auto;
 }
 
-.button-hover {
+.black-button {
   background-color: var(--black-color);
   transition: background-color .3s;
 }
 
-.button-hover:hover {
+.black-button:hover {
   background-color: var(--primary-color);
 }
+
+
 </style>

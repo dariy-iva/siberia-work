@@ -3,15 +3,9 @@
     <div class="wrapper header__container">
       <button
         type="button"
-        class="header__menu-button button-hover"
+        class="header__menu-button black-button"
         aria-label="menu"/>
-      <nuxt-link
-        exact
-        to="/">
-        <img
-          src="../assets/images/logos/logo_with_words.svg"
-          alt="logo"
-          class="header__logo"></nuxt-link>
+      <Logo className="header__logo"/>
       <label class="header__search-label">
         <input
           type="search"
@@ -19,7 +13,7 @@
           :class="`header__search-input ${searchIsOpen ? 'header__search-input_active' : ''}`">
         <button
           type="button"
-          :class="`header__search-button button-hover ${searchIsOpen ? 'header__search-button_active' : ''}`"
+          :class="`header__search-button black-button ${searchIsOpen ? 'header__search-button_active' : ''}`"
           @click="handleSearchButtonClick"/>
       </label>
     </div>
@@ -27,8 +21,14 @@
 </template>
 
 <script>
+import Logo from "~/components/Logo";
+
 export default {
   name: "Header",
+
+  components: {
+    Logo
+  },
 
   data() {
     return {
@@ -49,7 +49,7 @@ export default {
   position: fixed;
   left: 0;
   top: 0;
-  width: 100vw;
+  right: 0;
   padding: 45px 0;
   border-bottom: 16px solid var(--black-color);
   box-sizing: border-box;
@@ -71,9 +71,9 @@ export default {
 }
 
 .header__logo {
-  display: block;
   width: 302px;
   height: 30px;
+  background-image: url("../assets/images/logos/logo_with_words.svg");
 }
 
 .header__search-label {

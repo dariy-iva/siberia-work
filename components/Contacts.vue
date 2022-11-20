@@ -1,24 +1,34 @@
 <template>
-  <ul class="socials">
-    <li
-      v-for="item in socialLinks"
-      :key="item.label"
-      class="socials__item">
-      <a
-        :href="item.link"
-        target="_blank"
-        :class="`social__link ${isLight ? 'social__link_light' : ''} social__link_type_${item.label}`">
-      </a>
-    </li>
-  </ul>
+  <div :class="`contacts ${containerClass}`">
+    <button
+      type="button"
+      aria-label="open feedback form"
+      class="contacts__feedback button-hover">
+      Написать нам
+    </button>
+    <ul class="socials">
+      <li
+        v-for="item in socialLinks"
+        :key="item.label"
+        class="socials__item">
+        <a
+          :href="item.link"
+          target="_blank"
+          :class="`social__link ${isLight ? 'social__link_color_light' : 'social__link_color_dark'} social__link_type_${item.label}`">
+        </a>
+      </li>
+    </ul>
+  </div>
+
 </template>
 
 <script>
 export default {
-  name: "SocialList",
+  name: "Contacts",
 
   props: {
-    isLight: Boolean
+    isLight: Boolean,
+    containerClass: String
   },
 
   data() {
@@ -75,6 +85,30 @@ export default {
 </script>
 
 <style scoped>
+.contacts {
+  display: flex;
+}
+
+.contacts__feedback {
+  padding: 12px 40px;
+  width: fit-content;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.62;
+  text-align: center;
+  color: var(--white-color);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.contacts__feedback:hover {
+  color: var(--black-color);
+  background-color: var(--middle-gray-color);
+}
 
 .socials {
   margin: 0;
@@ -90,6 +124,7 @@ export default {
   display: block;
   width: 32px;
   height: 32px;
+  -webkit-mask-size: cover;
   transition: background-color .3s;
 }
 
@@ -97,8 +132,12 @@ export default {
   background-color: var(--primary-color);
 }
 
-.social__link_light {
+.social__link_color_light {
   background-color: var(--light-gray-color);
+}
+
+.social__link_color_dark {
+  background-color: var(--black-color);
 }
 
 .social__link_type_instagram {

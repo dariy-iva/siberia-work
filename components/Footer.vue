@@ -9,7 +9,7 @@
           <nuxt-link
             :to="link.link"
             no-prefetch
-            class="footer__nav-link">
+            class="footer__nav-link link-hover">
             {{ link.title }}
           </nuxt-link>
         </li>
@@ -19,15 +19,7 @@
         Федеральной службой по надзору в сфере связи, информационных технологий и массовых коммуникаций (Роскомнадзор)
         03.12.2022 за номером ЭЛ №ФС77-82385) сопровождаются пометкой «СИБИРЬ РАБОТАЕТ». Отдельные публикации могут
         содержать информацию, не предназначенную для пользователей до 18 лет.</p>
-      <div class="footer__column footer__socials">
-        <button
-          type="button"
-          aria-label="open feedback form"
-          class="footer__feedback button-hover">
-          Написать нам
-        </button>
-        <SocialList :isLight="true"/>
-      </div>
+        <Contacts :isLight="true" containerClass="footer__column footer__socials"/>
     </div>
     <p class="footer__author">сделано в<span class="footer__author-logo"></span></p>
   </footer>
@@ -35,14 +27,14 @@
 
 <script>
 import Logo from "~/components/Logo";
-import SocialList from "~/components/SocialList";
+import Contacts from "~/components/Contacts";
 
 export default {
   name: "Footer",
 
   components: {
     Logo,
-    SocialList
+    Contacts
   },
 
   data() {
@@ -117,11 +109,6 @@ export default {
   line-height: 1.25;
   text-transform: uppercase;
   color: var(--middle-gray-color);
-  transition: color .3s;
-}
-
-.footer__nav-link:hover {
-  color: var(--primary-color);
 }
 
 .footer__copyright {
@@ -136,31 +123,9 @@ export default {
 .footer__socials {
   max-width: 237px;
   min-width: 190px;
-  display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: space-between;
-}
-
-.footer__feedback {
-  padding: 12px 40px;
-  width: fit-content;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.62;
-  text-align: center;
-  color: var(--white-color);
-  background-color: var(--primary-color);
-  border: none;
-  border-radius: 8px;
-  box-sizing: border-box;
-  cursor: pointer;
-  transition: all .3s;
-}
-
-.footer__feedback:hover {
-  color: var(--black-color);
-  background-color: var(--middle-gray-color);
 }
 
 .footer__author {

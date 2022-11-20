@@ -67,6 +67,7 @@ export default {
   border: none;
   mask-image: url("assets/images/icons/menu.svg");
   -webkit-mask-image: url("assets/images/icons/menu.svg");
+  -webkit-mask-size: cover;
   cursor: pointer;
 }
 

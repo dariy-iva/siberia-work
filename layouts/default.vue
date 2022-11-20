@@ -1,6 +1,7 @@
 <template>
   <div class="page">
     <Header/>
+    <Menu/>
     <main class="content">
       <Nuxt/>
     </main>
@@ -11,11 +12,13 @@
 <script>
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
+import Menu from "~/components/Menu";
 
 export default {
   name: "default",
   components: {
     Header,
+    Menu,
     Footer
   },
   head () {
@@ -48,6 +51,7 @@ export default {
   --middle-gray-color: #DCE2EA;
   --gray-color: #B4C0CF;
   --beige-color: #CBBFAF;
+  background-color: var(--white-color);
 }
 
 .content {
@@ -67,6 +71,14 @@ export default {
 
 .black-button:hover {
   background-color: var(--primary-color);
+}
+
+.link-hover {
+  transition: color .3s;
+}
+
+.link-hover:hover {
+  color: var(--primary-color);
 }
 
 

@@ -103,6 +103,7 @@ export default {
   font-size: 24px;
   line-height: 1.58;
   text-transform: uppercase;
+  letter-spacing: -.7px;
 }
 
 .filter__collapse-button {

@@ -211,6 +211,7 @@ export default {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  background: url("assets/images/logos/logo_big.svg") top 71px right / 200px 656px no-repeat;
 }
 
 .menu__header {
@@ -221,8 +222,8 @@ export default {
 
 .menu__close-button {
   padding: 0;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   display: block;
   border: none;
   mask-image: url("assets/images/icons/close.svg");
@@ -244,19 +245,6 @@ export default {
   position: relative;
   min-height: 656px;
   width: 100%;
-}
-
-.menu__content::after {
-  z-index: -1;
-  content: "";
-  display: block;
-  position: absolute;
-  top: 228px;
-  right: -228px;
-  height: 200px;
-  width: 656px;
-  background: url("assets/images/logos/logo.svg") center / contain no-repeat;
-  rotate: 90deg;
 }
 
 .menu__columns {
@@ -313,9 +301,15 @@ export default {
   gap: 145px;
 }
 
+@media (max-width: 1378px) {
+  .menu__wrapper {
+    background-position: top 71px right 21px;
+  }
+}
+
 @media (max-width: 1200px) {
-  .menu__content::after {
-    display: none;
+  .menu__wrapper {
+    background: none;
   }
 }
 
@@ -324,11 +318,6 @@ export default {
     position: absolute;
     min-height: 800px;
     padding: 21px 0 40px;
-  }
-
-  .menu__close-button {
-    width: 18px;
-    height: 18px;
   }
 
   .menu__logo {

@@ -99,6 +99,7 @@ export default {
   font-size: 16px;
   line-height: 1.62;
   text-align: center;
+  letter-spacing: .5px;
   color: var(--white-color);
   background-color: var(--primary-color);
   border: none;

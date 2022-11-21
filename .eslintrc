@@ -1,4 +1,15 @@
 {
+  "root": true,
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "extends": [
+    "@nuxtjs"
+  ],
+
+  // add your custom rules here
+  //it is base on https://github.com/vuejs/eslint-config-vue
   "rules": {
     "vue/multi-word-component-names": 0,
     "vue/max-attributes-per-line": [

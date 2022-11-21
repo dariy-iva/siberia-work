@@ -2,6 +2,7 @@
   <footer class="footer">
     <div class="wrapper footer__columns">
       <Logo className="footer__column footer__logo"/>
+
       <ul class="footer__column footer__nav">
         <li
           v-for="link in navigationLinks"
@@ -14,14 +15,22 @@
           </nuxt-link>
         </li>
       </ul>
+
       <p class="footer__column footer__copyright">
         &copy; ООО «СИБИРЬ РАБОТАЕТ», 2022. Сообщения и материалы сетевого издания «СИБИРЬ РАБОТАЕТ» (зарегистрировано
         Федеральной службой по надзору в сфере связи, информационных технологий и массовых коммуникаций (Роскомнадзор)
         03.12.2022 за номером ЭЛ №ФС77-82385) сопровождаются пометкой «СИБИРЬ РАБОТАЕТ». Отдельные публикации могут
-        содержать информацию, не предназначенную для пользователей до 18 лет.</p>
-        <Contacts :isLight="true" containerClass="footer__column footer__socials"/>
+        содержать информацию, не предназначенную для пользователей до 18 лет.
+      </p>
+
+      <Contacts
+        :isLight="true"
+        containerClass="footer__column footer__socials"/>
     </div>
-    <p class="footer__author">сделано в<span class="footer__author-logo"></span></p>
+
+    <p class="footer__author">сделано в
+      <span class="footer__author-logo"/>
+    </p>
   </footer>
 </template>
 

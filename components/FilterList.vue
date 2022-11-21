@@ -1,33 +1,41 @@
 <template>
   <div class="filter">
-    <p class="filter__title">
+    <p :class="`filter__title ${titleClass}`">
       {{ title }}
       <button
         type="button"
         @click="toggleCollapse"
         aria-label="collapse list"
-        :class="`filter__collapse-button ${!isCollapsed ? 'filter__collapse-button_active' : ''}`"
+        :class="`filter__collapse-button
+        ${isDefaultOpen ? 'filter__collapse-button_hidden' : ''}
+        ${!isCollapsed ? 'filter__collapse-button_active' : ''}`"
       />
     </p>
+
     <ul
-      :class="`filter__list ${!isCollapsed ? 'filter__list_visible' : ''}`"
+      :class="`filter__list
+      ${isCollapsed && !isDefaultOpen ? 'filter__list_hidden' : !isCollapsed ? 'filter__list_visible' : ''}`"
       :ref="`filter-list-${name}`"
     >
       <li v-if="name === 'cities'">
         <label
           :class="`filter__option-label link-hover ${selectedValue === 'all' ? 'filter__option-label_checked' : ''}`">
           Все
+
           <input
             type="radio"
             :name="name"
             value="all"
             v-model="selectedValue"
-            class="filter__option-input">
+            class="filter__option-input"
+          >
         </label>
       </li>
+
       <li
         v-for="item in filterItems"
-        :key="item.label">
+        :key="item.label"
+      >
         <label
           :class="`filter__option-label link-hover
           ${selectedValue === item.label ? 'filter__option-label_checked' : ''}`">
@@ -48,7 +56,6 @@
             :value="item.label"
             v-model="selectedValue"
             class="filter__option-input">
-
         </label>
       </li>
     </ul>
@@ -61,10 +68,12 @@ export default {
 
   props: {
     title: String,
+    titleClass: String,
     name: String,
     hasIcon: Boolean,
     defaultValue: String,
-    filterItems: Array
+    filterItems: Array,
+    isDefaultOpen: Boolean
   },
 
   data() {
@@ -99,15 +108,28 @@ export default {
 
 .filter__title {
   margin: 0;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 1.58;
-  text-transform: uppercase;
+  display: flex;
+  align-items: center;
   letter-spacing: -.7px;
 }
 
 .filter__collapse-button {
+  padding: 0;
+  display: inline-block;
+  width: 22px;
+  height: 100%;
+  background: url("assets/images/icons/collapse.svg") center / 12px 7px no-repeat;
+  border: none;
+  cursor: pointer;
+  transition: rotate .3s;
+}
+
+.filter__collapse-button_hidden {
   display: none;
+}
+
+.filter__collapse-button_active {
+  rotate: 180deg;
 }
 
 .filter__list {
@@ -118,6 +140,11 @@ export default {
   gap: 10px;
   list-style-type: none;
   transition: max-height .4s ease-out;
+}
+
+.filter__list_hidden {
+  overflow: hidden;
+  max-height: 0;
 }
 
 .filter__option-label {
@@ -221,34 +248,17 @@ export default {
   }
 
   .filter__title {
-    margin-bottom: 0;
-    display: flex;
     justify-content: space-between;
-    align-items: center;
-    font-size: 20px;
-    line-height: 1.4;
   }
 
-  .filter__collapse-button {
-    padding: 0;
+  .filter__collapse-button_hidden {
     display: inline-block;
-    width: 22px;
-    height: 100%;
-    background: url("assets/images/icons/collapse.svg") center / 12px 7px no-repeat;
-    border: none;
-    cursor: pointer;
-    transition: rotate .3s;
-  }
-
-  .filter__collapse-button_active {
-    rotate: 180deg;
   }
 
   .filter__list {
     overflow: hidden;
     max-height: 0;
     gap: 12px;
-    transition: max-height .4s ease-out;
   }
 
   .filter__list_visible {

@@ -1,10 +1,19 @@
 <template>
   <div class="page">
     <Header :openMenu="toggleMenuOpen"/>
-    <Menu :isOpen="menuIsOpen" :onClose="toggleMenuOpen"/>
+
+    <Menu
+      :isOpen="menuIsOpen"
+      :onClose="toggleMenuOpen"/>
+
     <main class="content">
-      <Nuxt/>
+      <div class="wrapper">
+        <Nuxt/>
+
+        <UpButton/>
+      </div>
     </main>
+
     <Footer/>
   </div>
 </template>
@@ -13,12 +22,14 @@
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
 import Menu from "~/components/Menu";
+import UpButton from "~/components/UpButton";
 
 export default {
   name: "default",
   components: {
     Header,
     Menu,
+    UpButton,
     Footer
   },
   head() {
@@ -67,7 +78,8 @@ export default {
 }
 
 .content {
-  padding: calc(22px + 147px) 0 60px;
+  position: relative;
+  padding: calc(22px + 141px) 0 60px;
   flex-grow: 1;
 }
 
@@ -100,10 +112,13 @@ export default {
 }
 
 @media (max-width: 1023px) {
+  .content {
+    padding: calc(22px + 77px) 0 50px;
+  }
+
   .wrapper {
     padding: 0 16px;
   }
 }
-
 
 </style>

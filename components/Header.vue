@@ -4,18 +4,23 @@
       <button
         type="button"
         @click="openMenu"
-        class="header__menu-button black-button"
-        aria-label="menu"/>
+        :class="`header__menu-button black-button ${searchIsOpen ? 'header__menu-button_hidden' : ''}`"
+        aria-label="menu"
+      />
+
       <Logo :className="`header__logo ${searchIsOpen ? 'header__logo_hidden' : ''}`"/>
+
       <label class="header__search-label">
         <input
           type="search"
           placeholder="Поиск по сайту"
           :class="`header__search-input ${searchIsOpen ? 'header__search-input_active' : ''}`">
+
         <button
           type="button"
           :class="`header__search-button black-button ${searchIsOpen ? 'header__search-button_active' : ''}`"
-          @click="handleSearchButtonClick"/>
+          @click="handleSearchButtonClick"
+        />
       </label>
     </div>
   </header>
@@ -55,9 +60,11 @@ export default {
   left: 0;
   top: 0;
   right: 0;
+  z-index: 1;
   padding: 45px 0 39px;
   border-bottom: 16px solid var(--black-color);
   box-sizing: border-box;
+  background-color: inherit;
 }
 
 .header__container {
@@ -158,6 +165,10 @@ export default {
     border-width: 8px;
   }
 
+  .header__menu-button_hidden {
+    display: none;
+  }
+
   .header__logo {
     width: 160px;
     height: 16px;
@@ -166,7 +177,5 @@ export default {
   .header__logo_hidden {
     display: none;
   }
-
 }
-
 </style>

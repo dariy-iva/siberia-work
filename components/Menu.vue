@@ -13,9 +13,24 @@
 
       <div class="menu__content">
         <div class="menu__columns">
-          <FilterList title="Города" name="cities" :hasIcon="false" defaultValue="all" :filterItems="citiesList"/>
+          <FilterList
+            title="Города"
+            titleClass="menu__column-title"
+            name="cities"
+            :hasIcon="false"
+            defaultValue="all"
+            :filterItems="citiesList"
+            :isDefaultOpen="true"
+          />
 
-          <FilterList title="Рубрики" name="categories" :hasIcon="true" :filterItems="categoriesList"/>
+          <FilterList
+            title="Рубрики"
+            titleClass="menu__column-title"
+            name="categories"
+            :hasIcon="true"
+            :filterItems="categoriesList"
+            :isDefaultOpen="true"
+          />
 
           <nav>
             <ul class="menu__nav-list">
@@ -186,13 +201,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .menu {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 2;
+  z-index: 20;
   padding: 52px 0 94px;
   display: flex;
   background-color: inherit;
@@ -233,7 +248,7 @@ export default {
   cursor: pointer;
 }
 
-.menu__logo {
+.menu__header .menu__logo {
   display: none;
   width: 160px;
   height: 16px;
@@ -253,6 +268,13 @@ export default {
   display: grid;
   grid-template-columns: repeat(3, 245px);
   grid-column-gap: 91px;
+}
+
+.menu__column-title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.58;
+  text-transform: uppercase;
 }
 
 .menu__nav-list {
@@ -320,7 +342,7 @@ export default {
     padding: 21px 0 40px;
   }
 
-  .menu__logo {
+  .menu__header .menu__logo {
     display: block;
   }
 
@@ -335,6 +357,11 @@ export default {
     margin-bottom: 57px;
     grid-template-columns: 1fr;
     grid-row-gap: 38px;
+  }
+
+  .menu__column-title {
+    font-size: 20px;
+    line-height: 1.4;
   }
 
   .menu__nav-list {

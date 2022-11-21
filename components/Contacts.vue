@@ -6,19 +6,21 @@
       class="contacts__feedback button-hover">
       Написать нам
     </button>
+
     <ul class="socials">
       <li
         v-for="item in socialLinks"
         :key="item.label"
         class="socials__item">
+
         <a
           :href="item.link"
           target="_blank"
           :title="item.label"
           :class="`social__link
           ${isLight ? 'social__link_color_light' : 'social__link_color_dark'}
-          social__link_type_${item.label}`">
-        </a>
+          social__link_type_${item.label}`"
+        />
       </li>
     </ul>
   </div>

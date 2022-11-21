@@ -204,7 +204,7 @@ export default {
   -webkit-mask-image: url("assets/images/socials/subtract.svg");
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .socials {
     justify-content: center;
   }

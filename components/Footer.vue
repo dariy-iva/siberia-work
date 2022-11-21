@@ -68,13 +68,13 @@ export default {
 
 <style scoped>
 .footer {
-  padding: 52px 0 15px;
+  padding: 52px 0 0;
   background-color: var(--black-color);
   box-sizing: border-box;
 }
 
 .footer__columns {
-  margin-bottom: 66px;
+  margin-bottom: 48px;
   display: flex;
 }
 
@@ -103,6 +103,7 @@ export default {
 }
 
 .footer__nav-link {
+  display: block;
   text-decoration: none;
   font-weight: 700;
   font-size: 16px;
@@ -117,6 +118,7 @@ export default {
   font-weight: 400;
   font-size: 12px;
   line-height: 1.67;
+  letter-spacing: .3px;
   color: var(--middle-gray-color);
 }
 
@@ -125,10 +127,11 @@ export default {
   min-width: 190px;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: space-between;
+  gap: 72px;
 }
 
 .footer__author {
+  padding: 16px 0 16px 29px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -137,10 +140,13 @@ export default {
   font-weight: 700;
   font-size: 14px;
   line-height: 1.14;
+  letter-spacing: .8px;
   color: var(--white-color);
+  background-color: rgba(23, 29, 37, .5);
 }
 
 .footer__author::after {
+  margin-top: 4px;
   content: "";
   display: block;
   width: 15px;
@@ -153,6 +159,54 @@ export default {
   width: 91px;
   height: 21px;
   background: url("assets/images/logos/alente.svg") center / contain no-repeat;
+}
+
+@media (max-width: 1280px) {
+  .footer__columns {
+    justify-content: space-between;
+    gap: 99px;
+  }
+
+  .footer__column:first-child, .footer__column:nth-child(2) {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .footer {
+    padding-top: 40px;
+  }
+
+  .footer__logo {
+    margin-bottom: 50px;
+  }
+
+  .footer__columns {
+    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .footer__column:last-child {
+    margin: 0 auto;
+  }
+
+  .footer__nav {
+    margin-bottom: 20px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer__copyright {
+    order: 1;
+    margin-top: 40px;
+  }
+
+  .footer__socials {
+    align-items: center;
+    gap: 40px;
+  }
 }
 
 </style>

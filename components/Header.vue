@@ -6,7 +6,7 @@
         @click="openMenu"
         class="header__menu-button black-button"
         aria-label="menu"/>
-      <Logo className="header__logo"/>
+      <Logo :className="`header__logo ${searchIsOpen ? 'header__logo_hidden' : ''}`"/>
       <label class="header__search-label">
         <input
           type="search"
@@ -55,7 +55,7 @@ export default {
   left: 0;
   top: 0;
   right: 0;
-  padding: 45px 0;
+  padding: 45px 0 39px;
   border-bottom: 16px solid var(--black-color);
   box-sizing: border-box;
 }
@@ -109,6 +109,7 @@ export default {
   font-weight: 400;
   font-size: 14px;
   line-height: 1.43;
+  letter-spacing: .7px;
 }
 
 .header__search-input::placeholder {
@@ -149,6 +150,23 @@ export default {
 
 .header__search-button_active {
   background-color: var(--primary-color);
+}
+
+@media (max-width: 1023px) {
+  .header {
+    padding: 19px 0 9px;
+    border-width: 8px;
+  }
+
+  .header__logo {
+    width: 160px;
+    height: 16px;
+  }
+
+  .header__logo_hidden {
+    display: none;
+  }
+
 }
 
 </style>

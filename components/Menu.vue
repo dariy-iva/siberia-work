@@ -188,7 +188,7 @@ export default {
 
 <style scoped>
 .menu {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -199,6 +199,7 @@ export default {
   color: var(--black-color);
   visibility: hidden;
   opacity: 0;
+  box-sizing: border-box;
   transition: all .3s;
 }
 
@@ -315,8 +316,7 @@ export default {
 
 @media (max-width: 1023px) {
   .menu {
-    position: absolute;
-    min-height: 800px;
+    min-height: 100vh;
     padding: 21px 0 40px;
   }
 
@@ -332,9 +332,9 @@ export default {
   }
 
   .menu__columns {
-    margin-bottom: 58px;
+    margin-bottom: 57px;
     grid-template-columns: 1fr;
-    grid-row-gap: 36px;
+    grid-row-gap: 38px;
   }
 
   .menu__nav-list {

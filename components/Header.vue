@@ -3,6 +3,7 @@
     <div class="wrapper header__container">
       <button
         type="button"
+        @click="openMenu"
         class="header__menu-button black-button"
         aria-label="menu"/>
       <Logo className="header__logo"/>
@@ -28,6 +29,10 @@ export default {
 
   components: {
     Logo
+  },
+
+  props: {
+    openMenu: Function
   },
 
   data() {
@@ -67,7 +72,12 @@ export default {
   border: none;
   mask-image: url("assets/images/icons/menu.svg");
   -webkit-mask-image: url("assets/images/icons/menu.svg");
-  -webkit-mask-size: cover;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-position: center;
+  -webkit-mask-position: center;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
   cursor: pointer;
 }
 
@@ -125,6 +135,12 @@ export default {
   padding: 0;
   width: 22px;
   height: 22px;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-position: center;
+  -webkit-mask-position: center;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
   mask-image: url("assets/images/icons/search.svg");
   -webkit-mask-image: url("assets/images/icons/search.svg");
   border: none;

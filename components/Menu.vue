@@ -1,69 +1,29 @@
 <template>
-  <div class=" menu">
-    <div class="wrapper">
-      <button
-        type="button"
-        aria-label="close menu"
-        class="menu__close-button black-button"/>
-      <div class="menu__container">
-        <div class="menu__columns">
-          <div>
-            <p class="menu__legend">Города</p>
-            <ul class="menu__list menu__options">
-              <li>
-                <label
-                  :class="`menu__option-label link-hover ${selectedCity === 'all' ? 'menu__option-label_checked' : ''}`">
-                  Все
-                  <input
-                    type="radio"
-                    name="cities"
-                    value="all"
-                    v-model="selectedCity"
-                    class="menu__option-input">
-                </label>
-              </li>
-              <li v-for="city in citiesList" :key="`city-${city.id}`">
-                <label
-                  :class="`menu__option-label link-hover ${selectedCity === city.id ? 'menu__option-label_checked' : ''}`">
-                  {{ city.label }}
-                  <input
-                    type="radio"
-                    name="cities"
-                    :value="city.id"
-                    v-model="selectedCity"
-                    class="menu__option-input">
-                </label>
-              </li>
-            </ul>
-          </div>
+  <div :class="`menu ${isOpen ? 'menu_visible' : ''}`">
+    <div class="wrapper menu__wrapper">
+      <div class="menu__header">
+        <button
+          type="button"
+          @click="onClose"
+          aria-label="close menu"
+          class="menu__close-button black-button"/>
 
-          <div>
-            <p class="menu__legend">Рубрики</p>
-            <ul class="menu__list menu__options">
-              <li v-for="item in categoriesList" :key="`city-${item.name}`">
-                <label
-                  :class="`menu__option-label link-hover
-                  ${selectedCategory === item.name ? 'menu__option-label_checked' : ''}
-                  menu__option-label_type_${item.name}`">
-                  {{ item.label }}
-                  <input
-                    type="radio"
-                    name="categories"
-                    :value="item.name"
-                    v-model="selectedCategory"
-                    class="menu__option-input">
-                </label>
-              </li>
-            </ul>
-          </div>
+        <Logo className="menu__logo"/>
+      </div>
+
+      <div class="menu__content">
+        <div class="menu__columns">
+          <FilterList title="Города" name="cities" :hasIcon="false" defaultValue="all" :filterItems="citiesList"/>
+
+          <FilterList title="Рубрики" name="categories" :hasIcon="true" :filterItems="categoriesList"/>
 
           <nav>
-            <ul class="menu__list menu__navigation">
+            <ul class="menu__nav-list">
               <li
                 v-for="item in navigationLinks"
                 :key="item.title">
                 <nuxt-link
-                  to="item.link"
+                  :to="item.link"
                   no-prefetch
                   class="menu__nav-link link-hover">
                   {{ item.title }}
@@ -82,12 +42,21 @@
 
 <script>
 import Contacts from "~/components/Contacts";
+import Logo from "~/components/Logo";
+import FilterList from "~/components/FilterList";
 
 export default {
   name: "Menu",
 
   components: {
+    Logo,
+    FilterList,
     Contacts
+  },
+
+  props: {
+    isOpen: Boolean,
+    onClose: Function
   },
 
   data() {
@@ -225,8 +194,29 @@ export default {
   right: 0;
   z-index: 2;
   padding: 52px 0 94px;
+  display: flex;
   background-color: inherit;
   color: var(--black-color);
+  visibility: hidden;
+  opacity: 0;
+  transition: all .3s;
+}
+
+.menu_visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.menu__wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .menu__close-button {
@@ -241,24 +231,31 @@ export default {
   cursor: pointer;
 }
 
-.menu__container {
+.menu__logo {
+  display: none;
+  width: 160px;
+  height: 16px;
+  background-image: url("../assets/images/logos/logo_with_words.svg");
+}
+
+.menu__content {
+  flex-grow: 1;
   margin-top: 62px;
   position: relative;
-  overflow: hidden;
   min-height: 656px;
   width: 100%;
 }
 
-.menu__container::after {
+.menu__content::after {
+  z-index: -1;
   content: "";
   display: block;
   position: absolute;
   top: 228px;
   right: -228px;
-  overflow: hidden;
   height: 200px;
   width: 656px;
-  background: url("assets/images/logos/logo.svg") center / cover no-repeat;
+  background: url("assets/images/logos/logo.svg") center / contain no-repeat;
   rotate: 90deg;
 }
 
@@ -269,42 +266,10 @@ export default {
   grid-column-gap: 91px;
 }
 
-.menu__legend {
-  margin: 0 0 12px;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 1.58;
-  text-transform: uppercase;
-}
-
-.menu__list {
+.menu__nav-list {
   padding: 0;
   margin: 0;
   list-style-type: none;
-}
-
-.menu__options {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.menu__option-label {
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1.62;
-  cursor: pointer;
-}
-
-.menu__option-label_checked {
-  color: var(--primary-color);
-}
-
-.menu__option-input {
-  display: none;
-}
-
-.menu__navigation {
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -329,7 +294,12 @@ export default {
   height: 18px;
   mask-image: url("assets/images/icons/arrow.svg");
   -webkit-mask-image: url("assets/images/icons/arrow.svg");
-  -webkit-mask-size: cover;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-position: center;
+  -webkit-mask-position: center;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
   background-color: var(--black-color);
   transition: background-color .3s;
 }
@@ -341,5 +311,60 @@ export default {
 .menu__contacts {
   align-items: center;
   gap: 145px;
+}
+
+@media (max-width: 1200px) {
+  .menu__content::after {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .menu {
+    position: absolute;
+    min-height: 800px;
+    padding: 21px 0 40px;
+  }
+
+  .menu__close-button {
+    width: 18px;
+    height: 18px;
+  }
+
+  .menu__logo {
+    display: block;
+  }
+
+  .menu__content {
+    margin-top: 39px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .menu__columns {
+    margin-bottom: 58px;
+    grid-template-columns: 1fr;
+    grid-row-gap: 36px;
+  }
+
+  .menu__nav-list {
+    gap: 36px;
+  }
+
+  .menu__nav-link {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+
+  .menu__nav-arrow::after {
+    margin-left: 17px;
+  }
+
+  .menu__contacts {
+    padding: 0 calc(61px - 16px);
+    flex-direction: column;
+    gap: 50px;
+  }
 }
 </style>

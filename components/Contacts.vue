@@ -14,7 +14,10 @@
         <a
           :href="item.link"
           target="_blank"
-          :class="`social__link ${isLight ? 'social__link_color_light' : 'social__link_color_dark'} social__link_type_${item.label}`">
+          :title="item.label"
+          :class="`social__link
+          ${isLight ? 'social__link_color_light' : 'social__link_color_dark'}
+          social__link_type_${item.label}`">
         </a>
       </li>
     </ul>
@@ -124,7 +127,12 @@ export default {
   display: block;
   width: 32px;
   height: 32px;
-  -webkit-mask-size: cover;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-position: center;
+  -webkit-mask-position: center;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
   transition: background-color .3s;
 }
 

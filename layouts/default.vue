@@ -1,7 +1,7 @@
 <template>
   <div class="page">
-    <Header/>
-    <Menu/>
+    <Header :openMenu="toggleMenuOpen"/>
+    <Menu :isOpen="menuIsOpen" :onClose="toggleMenuOpen"/>
     <main class="content">
       <Nuxt/>
     </main>
@@ -21,11 +21,23 @@ export default {
     Menu,
     Footer
   },
-  head () {
+  head() {
     return {
       bodyAttrs: {
         class: 'body'
       }
+    }
+  },
+
+  data() {
+    return {
+      menuIsOpen: false,
+    }
+  },
+
+  methods: {
+    toggleMenuOpen() {
+      this.menuIsOpen = !this.menuIsOpen;
     }
   }
 }
@@ -79,6 +91,18 @@ export default {
 
 .link-hover:hover {
   color: var(--primary-color);
+}
+
+@media (max-width: 1378px) {
+  .wrapper {
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .wrapper {
+    padding: 0 16px;
+  }
 }
 
 

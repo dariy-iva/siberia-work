@@ -20,7 +20,7 @@ export default {
 .logo {
   display: block;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
 }
 </style>

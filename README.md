@@ -1,6 +1,6 @@
 # Проект Siberia work (тестовое задание)
 
-[Ссылка на проект на Versel](https://siberia-work-nw79v5bqa-dariy-iva.vercel.app/)
+[Ссылка на проект на Versel](https://siberia-work.vercel.app/)
 
 <img src="./static/promo.webp" alt="promo_img" />
 

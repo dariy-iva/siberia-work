@@ -1,9 +1,9 @@
 <template>
-  <div class="breadcrumbs">
-    <span class="breadcrumbs__item">Главная</span>
+  <ul class="breadcrumbs">
+    <li class="breadcrumbs__item">Главная</li>
 
-    <span class="breadcrumbs__item">Новости</span>
-  </div>
+    <li class="breadcrumbs__item">Новости</li>
+  </ul>
 </template>
 
 <script>
@@ -15,6 +15,8 @@ export default {
 <style scoped>
 .breadcrumbs {
   position: relative;
+  margin: 0;
+  padding-left: 0;
   padding-bottom: 8px;
   display: flex;
 }

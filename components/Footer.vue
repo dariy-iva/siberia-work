@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import {navigationLinksFooter} from "assets/constants/navigationLinks";
 import Logo from "~/components/Logo";
 import Contacts from "~/components/Contacts";
 
@@ -46,32 +47,11 @@ export default {
     Contacts
   },
 
-  data() {
-    return {
-      navigationLinks: [
-        {
-          title: 'О редакции',
-          link: '/'
-        },
-        {
-          title: 'Популярное',
-          link: '/'
-        },
-        {
-          title: 'База контактов',
-          link: '/'
-        },
-        {
-          title: 'Новости',
-          link: '/'
-        },
-        {
-          title: 'Пользовательское соглашение',
-          link: '/'
-        },
-      ],
+  computed: {
+    navigationLinks() {
+      return navigationLinksFooter;
     }
-  },
+  }
 }
 </script>
 

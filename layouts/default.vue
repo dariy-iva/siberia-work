@@ -50,6 +50,10 @@ export default {
     toggleMenuOpen() {
       this.menuIsOpen = !this.menuIsOpen;
     }
+  },
+
+  beforeCreate() {
+    this.$store.dispatch('getCities');
   }
 }
 </script>

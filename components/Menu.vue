@@ -56,6 +56,8 @@
 </template>
 
 <script>
+import {navigationLinksMenu} from "assets/constants/navigationLinks";
+import {categoriesList} from "assets/constants/categoriesList";
 import Contacts from "~/components/Contacts";
 import Logo from "~/components/Logo";
 import FilterList from "~/components/FilterList";
@@ -76,134 +78,30 @@ export default {
 
   data() {
     return {
-      citiesList: [
-        {
-          id: 1,
-          label: 'Красноярск'
-        },
-        {
-          id: 2,
-          label: 'Богучаны'
-        },
-        {
-          id: 3,
-          label: 'Тайшет'
-        },
-        {
-          id: 4,
-          label: 'Шелехов'
-        },
-        {
-          id: 5,
-          label: 'Абакан'
-        },
-        {
-          id: 6,
-          label: 'Саяногорск'
-        },
-        {
-          id: 7,
-          label: 'Дивногорск'
-        },
-        {
-          id: 8,
-          label: 'Ачинск'
-        },
-        {
-          id: 9,
-          label: 'Иркутск'
-        },
-        {
-          id: 10,
-          label: 'Брянск'
-        },
-        {
-          id: 11,
-          label: 'Новосибирск'
-        },
-        {
-          id: 12,
-          label: 'Омск'
-        },
-        {
-          id: 13,
-          label: 'Томск'
-        },
-        {
-          id: 14,
-          label: 'Кемерово'
-        },
-      ],
-      categoriesList: [
-        {
-          label: 'Герой с обложки',
-          name: 'hero'
-        },
-        {
-          label: 'Топ',
-          name: 'top'
-        },
-        {
-          label: 'Экскурсия',
-          name: 'trip'
-        },
-        {
-          label: 'Рабочее место',
-          name: 'workspace'
-        },
-        {
-          label: '5 экспертов',
-          name: 'experts'
-        },
-        {
-          label: 'Кейс',
-          name: 'keys'
-        },
-        {
-          label: 'Трендсеттер недели',
-          name: 'trendsetter'
-        },
-        {
-          label: '10 новых проектов недели',
-          name: 'projects'
-        },
-        {
-          label: 'Рецензия',
-          name: 'review'
-        },
-        {
-          label: 'Корпоративный выход',
-          name: 'corporative'
-        },
-        {
-          label: 'Индекс городов',
-          name: 'index'
-        },
-      ],
-      navigationLinks: [
-        {
-          title: 'Популярное',
-          link: '/',
-        },
-        {
-          title: 'Новости',
-          link: '/',
-        },
-        {
-          title: 'Наши герои',
-          link: '/',
-        },
-      ],
       selectedCity: 'all',
       selectedCategory: null,
     }
   },
+
+  computed: {
+    citiesList() {
+      return this.$store.getters['cities'];
+    },
+
+    navigationLinks() {
+      return navigationLinksMenu;
+    },
+
+    categoriesList() {
+      return categoriesList;
+    }
+  }
 }
 </script>
 
 <style>
 .menu {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -338,6 +236,7 @@ export default {
 
 @media (max-width: 1023px) {
   .menu {
+    position: absolute;
     min-height: 100vh;
     padding: 21px 0 40px;
   }

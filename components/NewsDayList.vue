@@ -9,7 +9,7 @@
           no-prefetch
           class="dayNews__link"
         />
-        
+
         <time class="dayNews__time">
           {{ getTime(item.time) }}
         </time>

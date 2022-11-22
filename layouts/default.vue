@@ -48,6 +48,11 @@ export default {
 
   methods: {
     toggleMenuOpen() {
+      if (typeof document !== 'undefined') {
+        const body = document.querySelector('.body')
+        this.menuIsOpen ? body.classList.remove('body_hidden') : body.classList.add('body_hidden');
+      }
+
       this.menuIsOpen = !this.menuIsOpen;
     }
   },
@@ -64,6 +69,15 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.body_hidden {
+  overflow: hidden;
+}
+
+.body_hidden::-webkit-scrollbar {
+  display: none;
+  width: 0;
 }
 
 .page {
@@ -111,7 +125,8 @@ export default {
 
 @media (max-width: 1378px) {
   .wrapper {
-    padding: 0 30px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 }
 
@@ -121,7 +136,8 @@ export default {
   }
 
   .wrapper {
-    padding: 0 16px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
 

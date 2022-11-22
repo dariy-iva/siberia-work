@@ -141,4 +141,9 @@ export default {
   }
 }
 
+@media (max-width: 767px) {
+  .body::-webkit-scrollbar {
+    display: none;
+  }
+}
 </style>

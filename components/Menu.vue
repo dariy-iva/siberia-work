@@ -1,66 +1,65 @@
 <template>
-  <div :class="`overlay ${isOpen ? 'overlay_visible' : ''}`">
-    <div :class="`menu ${isOpen ? 'menu_visible' : ''}`">
-      <div class="wrapper menu__wrapper">
-        <div class="menu__header">
-          <button
-            type="button"
-            @click="onClose"
-            aria-label="close menu"
-            class="menu__close-button black-button"/>
+  <Overlay :isVisible="isOpen">
+    <div class="wrapper menu">
+      <div class="menu__header">
+        <button
+          type="button"
+          @click="onClose"
+          aria-label="close menu"
+          class="menu__close-button black-button"/>
 
-          <Logo className="menu__logo"/>
+        <Logo className="menu__logo"/>
+      </div>
+
+      <div class="menu__content">
+        <div class="menu__columns">
+          <FilterList
+            title="Города"
+            titleClass="menu__column-title"
+            name="cities"
+            :hasIcon="false"
+            defaultValue="all"
+            :filterItems="citiesList"
+            :isDefaultOpen="true"
+          />
+
+          <FilterList
+            title="Рубрики"
+            titleClass="menu__column-title"
+            name="categories"
+            :hasIcon="true"
+            :filterItems="categoriesList"
+            :isDefaultOpen="true"
+          />
+
+          <nav>
+            <ul class="menu__nav-list">
+              <li
+                v-for="item in navigationLinks"
+                :key="item.title">
+                <nuxt-link
+                  :to="item.link"
+                  no-prefetch
+                  class="menu__nav-link link-hover">
+                  {{ item.title }}
+                  <span class="menu__nav-arrow"></span>
+                </nuxt-link>
+              </li>
+            </ul>
+          </nav>
         </div>
 
-        <div class="menu__content">
-          <div class="menu__columns">
-            <FilterList
-              title="Города"
-              titleClass="menu__column-title"
-              name="cities"
-              :hasIcon="false"
-              defaultValue="all"
-              :filterItems="citiesList"
-              :isDefaultOpen="true"
-            />
-
-            <FilterList
-              title="Рубрики"
-              titleClass="menu__column-title"
-              name="categories"
-              :hasIcon="true"
-              :filterItems="categoriesList"
-              :isDefaultOpen="true"
-            />
-
-            <nav>
-              <ul class="menu__nav-list">
-                <li
-                  v-for="item in navigationLinks"
-                  :key="item.title">
-                  <nuxt-link
-                    :to="item.link"
-                    no-prefetch
-                    class="menu__nav-link link-hover">
-                    {{ item.title }}
-                    <span class="menu__nav-arrow"></span>
-                  </nuxt-link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-
-          <Contacts :isLight="false" containerClass="menu__contacts"/>
-        </div>
+        <Contacts :isLight="false" containerClass="menu__contacts"/>
       </div>
     </div>
-  </div>
+  </Overlay>
 
 </template>
 
 <script>
 import {navigationLinksMenu} from "assets/constants/navigationLinks";
 import {categoriesList} from "assets/constants/categoriesList";
+import Overlay from "@/components/Overlay";
 import Contacts from "~/components/Contacts";
 import Logo from "~/components/Logo";
 import FilterList from "~/components/FilterList";
@@ -69,6 +68,7 @@ export default {
   name: "Menu",
 
   components: {
+    Overlay,
     Logo,
     FilterList,
     Contacts
@@ -103,38 +103,7 @@ export default {
 </script>
 
 <style>
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 15;
-  visibility: hidden;
-  opacity: 0;
-  transition: all .3s;
-}
-
 .menu {
-  position: absolute;
-  width: 100%;
-  max-height: 100%;
-  min-height: 100%;
-  z-index: 20;
-  overflow: auto;
-  display: flex;
-  background-color: var(--white-color);
-  color: var(--black-color);
-  box-sizing: border-box;
-  transition: all .3s;
-}
-
-.overlay_visible {
-  visibility: visible;
-  opacity: 1;
-}
-
-.menu__wrapper {
   padding-top: 52px;
   min-height: 100%;
   flex-grow: 1;
@@ -245,13 +214,9 @@ export default {
 }
 
 @media (max-width: 1023px) {
-  .menu__wrapper {
+  .menu {
     min-height: 100%;
     padding-top: 21px;
-  }
-
-  .menu::-webkit-scrollbar {
-    display: none;
   }
 
   .menu__header .menu__logo {

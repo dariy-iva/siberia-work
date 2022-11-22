@@ -4,9 +4,15 @@
       v-for="item in itemList.slice(0, 4)"
       :key="item.id">
       <article class="dayNews__item">
-        <p class="dayNews__time">
+        <nuxt-link
+          to="/"
+          no-prefetch
+          class="dayNews__link"
+        />
+        
+        <time class="dayNews__time">
           {{ getTime(item.time) }}
-        </p>
+        </time>
 
         <h3 class="dayNews__title">{{ item.title }}</h3>
 
@@ -25,9 +31,15 @@
       v-for="item in itemList.slice(4)"
       :key="item.id">
       <article class="dayNews__item">
-        <p class="dayNews__time">
+        <nuxt-link
+          to="/"
+          no-prefetch
+          class="dayNews__link"
+        />
+
+        <time class="dayNews__time">
           {{ getTime(item.time) }}
-        </p>
+        </time>
 
         <h3 class="dayNews__title">{{ item.title }}</h3>
 
@@ -101,6 +113,14 @@ export default {
   width: 400px;
   height: 1px;
   background-color: var(--middle-gray-color);
+}
+
+.dayNews__link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .dayNews__time {

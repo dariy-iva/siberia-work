@@ -168,7 +168,7 @@ export default {
   grid-column-gap: 91px;
 }
 
-.menu__column-title {
+.filter__title.menu__column-title {
   font-weight: 700;
   font-size: 24px;
   line-height: 1.58;
@@ -217,7 +217,7 @@ export default {
   background-color: var(--primary-color);
 }
 
-.menu__contacts {
+.menu__content .menu__contacts {
   align-items: center;
   gap: 145px;
 }
@@ -258,7 +258,7 @@ export default {
     grid-row-gap: 38px;
   }
 
-  .menu__column-title {
+  .filter__title.menu__column-title {
     font-size: 20px;
     line-height: 1.4;
   }
@@ -276,7 +276,7 @@ export default {
     margin-left: 17px;
   }
 
-  .menu__contacts {
+  .menu__content .menu__contacts {
     padding: 0 calc(61px - 16px);
     flex-direction: column;
     gap: 50px;

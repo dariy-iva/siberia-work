@@ -88,7 +88,7 @@ export default {
   cursor: pointer;
 }
 
-.header__logo {
+.header__container .header__logo {
   width: 302px;
   height: 30px;
   background-image: url("../assets/images/logos/logo_with_words.svg");
@@ -169,12 +169,12 @@ export default {
     display: none;
   }
 
-  .header__logo {
+  .header__container .header__logo {
     width: 160px;
     height: 16px;
   }
 
-  .header__logo_hidden {
+  .header__container .header__logo_hidden {
     display: none;
   }
 }

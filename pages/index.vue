@@ -148,7 +148,7 @@ export default {
   color: var(--black-color);
 }
 
-.news__aside-vertical_slot {
+.aside-vertical.news__aside-vertical_slot {
   display: none;
 }
 
@@ -187,15 +187,15 @@ export default {
     line-height: 1.4;
   }
 
-  .news__aside-horizontal {
+  .aside-horizontal.news__aside-horizontal {
     display: none;
   }
 
-  .news__aside-vertical_slot {
+  .aside-vertical.news__aside-vertical_slot {
     display: flex;
   }
 
-  .news__aside-vertical_column {
+  .aside-vertical.news__aside-vertical_column {
     display: none;
   }
 }

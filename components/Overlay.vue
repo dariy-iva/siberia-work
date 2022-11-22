@@ -23,7 +23,7 @@ export default {
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 15;
+  z-index: -1;
   visibility: hidden;
   opacity: 0;
   transition: all .3s;
@@ -32,6 +32,7 @@ export default {
 .overlay_visible {
   visibility: visible;
   opacity: 1;
+  z-index: 100;
 }
 
 .overlay__container {

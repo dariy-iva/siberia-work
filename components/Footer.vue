@@ -156,7 +156,7 @@ export default {
     gap: 99px;
   }
 
-  .footer__column:first-child, .footer__column:nth-child(2) {
+  .footer__column.footer__column:first-child, .footer__column.footer__column:nth-child(2) {
     margin-right: 0;
   }
 }

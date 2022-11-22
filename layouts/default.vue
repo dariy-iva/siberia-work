@@ -1,10 +1,8 @@
 <template>
   <div class="page">
-    <Header :openMenu="toggleMenuOpen"/>
+    <Header/>
 
-    <Menu
-      :isOpen="menuIsOpen"
-      :onClose="toggleMenuOpen"/>
+    <Menu/>
 
     <main class="content">
       <div class="wrapper">
@@ -37,23 +35,6 @@ export default {
       bodyAttrs: {
         class: 'body'
       }
-    }
-  },
-
-  data() {
-    return {
-      menuIsOpen: false,
-    }
-  },
-
-  methods: {
-    toggleMenuOpen() {
-      if (typeof document !== 'undefined') {
-        const body = document.querySelector('.body')
-        this.menuIsOpen ? body.classList.remove('body_hidden') : body.classList.add('body_hidden');
-      }
-
-      this.menuIsOpen = !this.menuIsOpen;
     }
   },
 
@@ -132,7 +113,7 @@ export default {
 
 @media (max-width: 1023px) {
   .content {
-    padding: calc(22px + 77px) 0 50px;
+    padding: calc(22px + 68px) 0 50px;
   }
 
   .wrapper {

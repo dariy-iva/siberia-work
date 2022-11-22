@@ -1,25 +1,30 @@
 <template>
-  <div class="filter">
-    <p :class="`filter__title ${titleClass}`">
+  <div :class="`filter ${containerClass}`">
+    <p
+      :class="`filter__title ${titleClass} ${!isDefaultOpen ? 'filter__title_active' : ''}`"
+      @click="toggleCollapse"
+    >
       {{ title }}
-      <button
-        type="button"
-        @click="toggleCollapse"
+
+      <span
         aria-label="collapse list"
-        :class="`filter__collapse-button
-        ${isDefaultOpen ? 'filter__collapse-button_hidden' : ''}
-        ${!isCollapsed ? 'filter__collapse-button_active' : ''}`"
+        :class="`filter__collapse-icon
+        ${isDefaultOpen ? 'filter__collapse-icon_hidden' : ''}
+        ${!isCollapsed ? 'filter__collapse-icon_active' : ''}`"
       />
     </p>
 
     <ul
       :class="`filter__list
+      ${contentClass}
       ${isCollapsed && !isDefaultOpen ? 'filter__list_hidden' : !isCollapsed ? 'filter__list_visible' : ''}`"
       :ref="`filter-list-${name}`"
     >
       <li v-if="name === 'cities'">
         <label
-          :class="`filter__option-label link-hover ${selectedValue === 'all' ? 'filter__option-label_checked' : ''}`">
+          :class="`filter__option-label link-hover
+          ${selectedValue === 'all' ? 'filter__option-label_checked' : ''}
+          ${isAbsolutePosition ? 'filter__option-label_type_with-checked-icon' : ''}`">
           Все
 
           <input
@@ -68,12 +73,15 @@ export default {
 
   props: {
     title: String,
+    containerClass: String,
     titleClass: String,
+    contentClass: String,
     name: String,
     hasIcon: Boolean,
     defaultValue: String,
     filterItems: Array,
-    isDefaultOpen: Boolean
+    isDefaultOpen: Boolean,
+    isAbsolutePosition: Boolean
   },
 
   data() {
@@ -94,13 +102,31 @@ export default {
       } else {
         content.style.maxHeight = content.scrollHeight + "px";
       }
+    },
+
+    handleWindowClick(e) {
+      const filterElement = document.querySelector(`.${this.containerClass}`);
+      if (!filterElement.contains(e.target) && this.isAbsolutePosition && !this.isCollapsed) {
+        this.toggleCollapse();
+      }
     }
+  },
+
+  beforeMount() {
+    (typeof document !== 'undefined' && this.isAbsolutePosition)
+    && document.addEventListener('click', this.handleWindowClick);
+  },
+
+  beforeDestroy() {
+    (typeof document !== 'undefined' && this.isAbsolutePosition)
+    && document.removeEventListener('click', this.handleWindowClick);
   }
 }
 </script>
 
-<style scoped>
+<style>
 .filter {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -113,7 +139,11 @@ export default {
   letter-spacing: -.7px;
 }
 
-.filter__collapse-button {
+.filter__title_active {
+  cursor: pointer;
+}
+
+.filter__collapse-icon {
   padding: 0;
   display: inline-block;
   width: 22px;
@@ -124,11 +154,11 @@ export default {
   transition: rotate .3s;
 }
 
-.filter__collapse-button_hidden {
+.filter__collapse-icon_hidden {
   display: none;
 }
 
-.filter__collapse-button_active {
+.filter__collapse-icon_active {
   rotate: 180deg;
 }
 
@@ -139,15 +169,22 @@ export default {
   flex-direction: column;
   gap: 10px;
   list-style-type: none;
-  transition: max-height .4s ease-out;
+  visibility: visible;
+  opacity: 1;
+  transition: all .4s ease-out;
 }
 
 .filter__list_hidden {
   overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
   max-height: 0;
 }
 
 .filter__option-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
   font-weight: 700;
   font-size: 16px;
   line-height: 1.62;
@@ -156,6 +193,27 @@ export default {
 
 .filter__option-label_checked {
   color: var(--primary-color);
+}
+
+.filter__option-label_checked::after {
+  content: "";
+  /*display: inline-block;*/
+  display: none;
+  width: 24px;
+  height: 12px;
+  mask-image: url("static/images/icons/checked.svg");
+  -webkit-mask-image: url("static/images/icons/checked.svg");
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-position: center;
+  -webkit-mask-position: center;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  background-color: var(--primary-color);
+}
+
+.filter__option-label_checked.filter__option-label_type_with-checked-icon::after {
+  display: inline-block;
 }
 
 .filter__option-label_with-icon {
@@ -249,9 +307,10 @@ export default {
 
   .filter__title {
     justify-content: space-between;
+    cursor: pointer;
   }
 
-  .filter__collapse-button_hidden {
+  .filter__collapse-icon_hidden {
     display: inline-block;
   }
 
@@ -265,26 +324,8 @@ export default {
     margin-top: 18px;
   }
 
-  .filter__option-label {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-  }
-
   .filter__option-label_checked::after {
-    content: "";
     display: inline-block;
-    width: 24px;
-    height: 12px;
-    mask-image: url("static/images/icons/checked.svg");
-    -webkit-mask-image: url("static/images/icons/checked.svg");
-    mask-size: contain;
-    -webkit-mask-size: contain;
-    mask-position: center;
-    -webkit-mask-position: center;
-    mask-repeat: no-repeat;
-    -webkit-mask-repeat: no-repeat;
-    background-color: var(--primary-color);
   }
 
 }

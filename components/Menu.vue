@@ -4,16 +4,22 @@
       <div class="menu__header">
         <button
           type="button"
-          @click="onClose"
+          @click="closeMenu"
           aria-label="close menu"
-          class="menu__close-button black-button"/>
+          :class="`menu__close-button black-button
+          ${isMainMenu && isOpen ? 'menu__close-button_type_cross' : isOpen ? 'menu__close-button_type_arrow' : ''}`"/>
 
         <Logo className="menu__logo"/>
       </div>
 
       <div class="menu__content">
         <div class="menu__columns">
+          <SearchInput
+            v-if="hasSearch"
+            :isMenu="true"/>
+
           <FilterList
+            v-if="hasCities"
             title="Города"
             titleClass="menu__column-title"
             name="cities"
@@ -24,6 +30,7 @@
           />
 
           <FilterList
+            v-if="hasCategories"
             title="Рубрики"
             titleClass="menu__column-title"
             name="categories"
@@ -32,7 +39,7 @@
             :isDefaultOpen="true"
           />
 
-          <nav>
+          <nav v-if="isMainMenu">
             <ul class="menu__nav-list">
               <li
                 v-for="item in navigationLinks"
@@ -49,7 +56,7 @@
           </nav>
         </div>
 
-        <Contacts :isLight="false" containerClass="menu__contacts"/>
+        <Contacts v-if="isMainMenu" :isLight="false" containerClass="menu__contacts"/>
       </div>
     </div>
   </Overlay>
@@ -57,12 +64,15 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 import {navigationLinksMenu} from "assets/constants/navigationLinks";
 import {categoriesList} from "assets/constants/categoriesList";
 import Overlay from "@/components/Overlay";
 import Contacts from "~/components/Contacts";
 import Logo from "~/components/Logo";
 import FilterList from "~/components/FilterList";
+import SearchInput from "@/components/SearchInput";
+import {toggleBodyOverflow} from "assets/utils/toggleBodyOverflow";
 
 export default {
   name: "Menu",
@@ -70,13 +80,9 @@ export default {
   components: {
     Overlay,
     Logo,
+    SearchInput,
     FilterList,
     Contacts
-  },
-
-  props: {
-    isOpen: Boolean,
-    onClose: Function
   },
 
   data() {
@@ -87,9 +93,14 @@ export default {
   },
 
   computed: {
-    citiesList() {
-      return this.$store.getters['cities'];
-    },
+    ...mapGetters({
+      isOpen: 'menu/isOpen',
+      isMainMenu: 'menu/isMainMenu',
+      hasSearch: 'menu/hasSearch',
+      hasCities: 'menu/hasCities',
+      hasCategories: 'menu/hasCategories',
+      citiesList: 'cities',
+    }),
 
     navigationLinks() {
       return navigationLinksMenu;
@@ -99,6 +110,14 @@ export default {
       return categoriesList;
     }
   },
+
+  methods: {
+    closeMenu() {
+      toggleBodyOverflow(this.isOpen);
+
+      this.$store.dispatch('menu/closeMenu');
+    }
+  }
 }
 </script>
 
@@ -119,14 +138,29 @@ export default {
 
 .menu__close-button {
   padding: 0;
-  width: 18px;
   height: 18px;
   display: block;
   border: none;
+  mask-size: cover;
+  -webkit-mask-size: cover;
+  mask-position: center;
+  -webkit-mask-position: center;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.menu__close-button_type_cross {
+  width: 18px;
   mask-image: url("static/images/icons/close.svg");
   -webkit-mask-image: url("static/images/icons/close.svg");
-  -webkit-mask-size: cover;
-  cursor: pointer;
+}
+
+.menu__close-button_type_arrow {
+  width: 20px;
+  mask-image: url("static/images/icons/arrow.svg");
+  -webkit-mask-image: url("static/images/icons/arrow.svg");
+  rotate: 180deg;
 }
 
 .menu__header .menu__logo {

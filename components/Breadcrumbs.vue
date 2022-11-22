@@ -1,8 +1,10 @@
 <template>
   <ul class="breadcrumbs">
-    <li class="breadcrumbs__item">Главная</li>
+    <li class="breadcrumbs__item">
+      <nuxt-link to="/" no-prefetch class="breadcrumbs__link breadcrumbs__text">Главная</nuxt-link>
+    </li>
 
-    <li class="breadcrumbs__item">Новости</li>
+    <li class="breadcrumbs__item breadcrumbs__text">Новости</li>
   </ul>
 </template>
 
@@ -24,7 +26,7 @@ export default {
 .breadcrumbs::after {
   content: "";
   position: absolute;
-  top: 0;
+  top: 100%;
   bottom: -1px;
   display: block;
   width: 91.5%;
@@ -34,9 +36,6 @@ export default {
 .breadcrumbs__item {
   display: flex;
   align-items: center;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.43;
 }
 
 .breadcrumbs__item:not(:first-of-type)::before {
@@ -49,12 +48,19 @@ export default {
   rotate: -90deg;
 }
 
-.breadcrumbs__item:not(:last-of-type) {
-  color: var(--primary-color);
-}
-
 .breadcrumbs__item:last-of-type {
   color: var(--gray-color);
+}
+
+.breadcrumbs__text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.43;
+}
+
+.breadcrumbs__link {
+  text-decoration: none;
+  color: var(--primary-color);
 }
 
 @media (max-width: 1023px) {

@@ -6,14 +6,26 @@
       <h1 class="news__title">Новости</h1>
 
       <FilterList
-        title="Выбрать город"
+        title="Город"
         titleClass="news__city-title"
+        containerClass="news__city-container"
+        contentClass="news__city-content"
         name="cities"
         :hasIcon="false"
         defaultValue="all"
         :filterItems="citiesList"
         :isDefaultOpen="false"
+        :isAbsolutePosition="true"
       />
+
+      <button
+        type="button"
+        @click="openMenu"
+        class="news__city-title news__city-button"
+        aria-label="раскрыть список городов">
+        Выбрать город
+        <span class="news__city-icon"/>
+      </button>
 
       <ul class="news__list">
         <li
@@ -40,10 +52,12 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 import NewsDayList from "~/components/NewsDayList";
 import AsideVertical from "~/components/AsideVertical";
 import FilterList from "~/components/FilterList";
 import Breadcrumbs from "~/components/Breadcrumbs";
+import {toggleBodyOverflow} from "assets/utils/toggleBodyOverflow";
 
 export default {
   name: 'IndexPage',
@@ -56,13 +70,11 @@ export default {
   },
 
   computed: {
-    citiesList() {
-      return this.$store.getters['cities'];
-    },
-
-    newsList() {
-      return this.$store.getters['news'];
-    }
+    ...mapGetters({
+      citiesList: 'cities',
+      newsList: 'news',
+      menuIsOpen: 'menu/isOpen'
+    }),
   },
 
   methods: {
@@ -87,6 +99,16 @@ export default {
       return nowDay === `${day}.${month}.${year}`
         ? 'Сегодня'
         : `${day} ${monthsOnRu[month - 1]}`
+    },
+
+    openMenu() {
+      toggleBodyOverflow(this.menuIsOpen);
+
+      this.$store.dispatch({
+        type: 'menu/openMenu',
+        isMainMenu: false,
+        hasCities: true,
+      });
     }
   },
 
@@ -119,15 +141,42 @@ export default {
   color: var(--black-color);
 }
 
+.filter.news__city-container {
+  max-width: fit-content;
+  justify-self: flex-end;
+}
+
+.filter__title.news__city-title, .news__city-title {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.62;
+}
+
 .filter__title.news__city-title {
   margin-right: 12px;
   align-self: flex-end;
   justify-self: flex-end;
   gap: 5px;
   max-width: max-content;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.62;
+}
+
+.filter__list.news__city-content {
+  position: absolute;
+  top: 33px;
+  right: 0;
+  z-index: 20;
+  min-width: calc(260px - 32px - 2px);
+  background-color: var(--white-color);
+  border-radius: 5px;
+}
+
+.filter__list_visible.news__city-content {
+  padding: 16px;
+  border: 1px solid var(--primary-color);
+}
+
+.news__city-button {
+  display: none;
 }
 
 .news__list {
@@ -170,15 +219,49 @@ export default {
     line-height: 1.4;
   }
 
-  .filter__title.news__city-title {
-    align-self: flex-start;
-    max-width: 100%;
-    width: 100%;
-    margin-right: 0;
-    letter-spacing: .8px;
+  .filter.news__city-container {
+    display: none;
+  }
+
+  .news__city-button {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color .3s;
+  }
+
+  .news__city-button:hover {
+    color: var(--primary-color);
+  }
+
+  .news__city-icon {
+    content: "";
+    display: block;
+    width: 22px;
+    height: 22px;
+    mask-size: 12px 7px;
+    -webkit-mask-size: 12px 7px;
+    mask-position: center;
+    -webkit-mask-position: center;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-image: url("static/images/icons/collapse.svg");
+    -webkit-mask-image: url("static/images/icons/collapse.svg");
+    background-color: var(--black-color);
+    rotate: -90deg;
+    transition: background-color .3s;
+  }
+
+  .news__city-button:hover .news__city-icon {
+    background-color: var(--primary-color);
   }
 
   .news__list {
+    max-width: 100%;
     gap: 50px;
   }
 

@@ -67,8 +67,8 @@ export default {
   display: inline-block;
   width: 20px;
   height: 18px;
-  mask-image: url("assets/images/icons/arrow.svg");
-  -webkit-mask-image: url("assets/images/icons/arrow.svg");
+  mask-image: url("static/images/icons/arrow.svg");
+  -webkit-mask-image: url("static/images/icons/arrow.svg");
   mask-size: cover;
   -webkit-mask-size: cover;
   mask-position: center;

@@ -118,7 +118,7 @@ export default {
   display: inline-block;
   width: 22px;
   height: 100%;
-  background: url("assets/images/icons/collapse.svg") center / 12px 7px no-repeat;
+  background: url("static/images/icons/collapse.svg") center / 12px 7px no-repeat;
   border: none;
   cursor: pointer;
   transition: rotate .3s;
@@ -183,59 +183,59 @@ export default {
 }
 
 .filter__option-icon_type_hero {
-  mask-image: url("assets/images/categories/hero.svg");
-  -webkit-mask-image: url("assets/images/categories/hero.svg");
+  mask-image: url("static/images/categories/hero.svg");
+  -webkit-mask-image: url("static/images/categories/hero.svg");
 }
 
 .filter__option-icon_type_top {
-  mask-image: url("assets/images/icons/arrow.svg");
-  -webkit-mask-image: url("assets/images/icons/arrow.svg");
+  mask-image: url("static/images/icons/arrow.svg");
+  -webkit-mask-image: url("static/images/icons/arrow.svg");
   rotate: -90deg;
 }
 
 .filter__option-icon_type_trip {
-  mask-image: url("assets/images/categories/trip.svg");
-  -webkit-mask-image: url("assets/images/categories/trip.svg");
+  mask-image: url("static/images/categories/trip.svg");
+  -webkit-mask-image: url("static/images/categories/trip.svg");
 }
 
 .filter__option-icon_type_workspace {
-  mask-image: url("assets/images/categories/workspace.svg");
-  -webkit-mask-image: url("assets/images/categories/workspace.svg");
+  mask-image: url("static/images/categories/workspace.svg");
+  -webkit-mask-image: url("static/images/categories/workspace.svg");
 }
 
 .filter__option-icon_type_experts {
-  mask-image: url("assets/images/categories/experts.svg");
-  -webkit-mask-image: url("assets/images/categories/experts.svg");
+  mask-image: url("static/images/categories/experts.svg");
+  -webkit-mask-image: url("static/images/categories/experts.svg");
 }
 
 .filter__option-icon_type_keys {
-  mask-image: url("assets/images/categories/keys.svg");
-  -webkit-mask-image: url("assets/images/categories/keys.svg");
+  mask-image: url("static/images/categories/keys.svg");
+  -webkit-mask-image: url("static/images/categories/keys.svg");
 }
 
 .filter__option-icon_type_trendsetter {
-  mask-image: url("assets/images/categories/trendsetter.svg");
-  -webkit-mask-image: url("assets/images/categories/trendsetter.svg");
+  mask-image: url("static/images/categories/trendsetter.svg");
+  -webkit-mask-image: url("static/images/categories/trendsetter.svg");
 }
 
 .filter__option-icon_type_projects {
-  mask-image: url("assets/images/categories/projects.svg");
-  -webkit-mask-image: url("assets/images/categories/projects.svg");
+  mask-image: url("static/images/categories/projects.svg");
+  -webkit-mask-image: url("static/images/categories/projects.svg");
 }
 
 .filter__option-icon_type_review {
-  mask-image: url("assets/images/categories/review.svg");
-  -webkit-mask-image: url("assets/images/categories/review.svg");
+  mask-image: url("static/images/categories/review.svg");
+  -webkit-mask-image: url("static/images/categories/review.svg");
 }
 
 .filter__option-icon_type_corporative {
-  mask-image: url("assets/images/categories/corporative.svg");
-  -webkit-mask-image: url("assets/images/categories/corporative.svg");
+  mask-image: url("static/images/categories/corporative.svg");
+  -webkit-mask-image: url("static/images/categories/corporative.svg");
 }
 
 .filter__option-icon_type_index {
-  mask-image: url("assets/images/categories/index.svg");
-  -webkit-mask-image: url("assets/images/categories/index.svg");
+  mask-image: url("static/images/categories/index.svg");
+  -webkit-mask-image: url("static/images/categories/index.svg");
 }
 
 .filter__option-input {
@@ -276,8 +276,8 @@ export default {
     display: inline-block;
     width: 24px;
     height: 12px;
-    mask-image: url("assets/images/icons/checked.svg");
-    -webkit-mask-image: url("assets/images/icons/checked.svg");
+    mask-image: url("static/images/icons/checked.svg");
+    -webkit-mask-image: url("static/images/icons/checked.svg");
     mask-size: contain;
     -webkit-mask-size: contain;
     mask-position: center;

@@ -77,8 +77,8 @@ export default {
   width: 23px;
   height: 22px;
   border: none;
-  mask-image: url("assets/images/icons/menu.svg");
-  -webkit-mask-image: url("assets/images/icons/menu.svg");
+  mask-image: url("static/images/icons/menu.svg");
+  -webkit-mask-image: url("static/images/icons/menu.svg");
   mask-size: contain;
   -webkit-mask-size: contain;
   mask-position: center;
@@ -91,7 +91,7 @@ export default {
 .header__container .header__logo {
   width: 302px;
   height: 30px;
-  background-image: url("../assets/images/logos/logo_with_words.svg");
+  background-image: url("static/images/logos/logo_with_words.svg");
 }
 
 .header__search-label {
@@ -132,7 +132,7 @@ export default {
 .header__search-input::-webkit-search-cancel-button {
   width: 9.5px;
   height: 9.5px;
-  content: url("assets/images/icons/close.svg");
+  content: url("static/images/icons/close.svg");
   -webkit-appearance: none;
 }
 
@@ -149,8 +149,8 @@ export default {
   -webkit-mask-position: center;
   mask-repeat: no-repeat;
   -webkit-mask-repeat: no-repeat;
-  mask-image: url("assets/images/icons/search.svg");
-  -webkit-mask-image: url("assets/images/icons/search.svg");
+  mask-image: url("static/images/icons/search.svg");
+  -webkit-mask-image: url("static/images/icons/search.svg");
   border: none;
   cursor: pointer;
 }

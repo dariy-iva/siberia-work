@@ -78,7 +78,7 @@ export default {
 .footer__columns .footer__logo {
   min-width: 96px;
   height: 31px;
-  background-image: url("../assets/images/logos/logo.svg");
+  background-image: url("static/images/logos/logo.svg");
 }
 
 .footer__nav {
@@ -140,14 +140,14 @@ export default {
   display: block;
   width: 15px;
   height: 14px;
-  background: url("assets/images/icons/heart.svg") center / contain no-repeat;
+  background: url("static/images/icons/heart.svg") center / contain no-repeat;
 }
 
 .footer__author-logo {
   display: block;
   width: 91px;
   height: 21px;
-  background: url("assets/images/logos/alente.svg") center / contain no-repeat;
+  background: url("static/images/logos/alente.svg") center / contain no-repeat;
 }
 
 @media (max-width: 1280px) {

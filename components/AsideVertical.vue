@@ -35,7 +35,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: url("assets/images/advertising.webp") center / cover no-repeat;
+  background: url("static/images/advertising.webp") center / cover no-repeat;
 }
 
 .aside-vertical__link {

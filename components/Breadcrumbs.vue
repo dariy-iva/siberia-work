@@ -45,7 +45,7 @@ export default {
   display: block;
   width: 11.5px;
   height: 6.5px;
-  background: url("assets/images/icons/collapse.svg");
+  background: url("static/images/icons/collapse.svg");
   rotate: -90deg;
 }
 

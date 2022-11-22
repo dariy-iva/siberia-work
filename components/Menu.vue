@@ -125,7 +125,7 @@ export default {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  background: url("assets/images/logos/logo_big.svg") top 71px right / 200px 656px no-repeat;
+  background: url("static/images/logos/logo_big.svg") top 71px right / 200px 656px no-repeat;
 }
 
 .menu__header {
@@ -140,8 +140,8 @@ export default {
   height: 18px;
   display: block;
   border: none;
-  mask-image: url("assets/images/icons/close.svg");
-  -webkit-mask-image: url("assets/images/icons/close.svg");
+  mask-image: url("static/images/icons/close.svg");
+  -webkit-mask-image: url("static/images/icons/close.svg");
   -webkit-mask-size: cover;
   cursor: pointer;
 }
@@ -150,7 +150,7 @@ export default {
   display: none;
   width: 160px;
   height: 16px;
-  background-image: url("../assets/images/logos/logo_with_words.svg");
+  background-image: url("static/images/logos/logo_with_words.svg");
 }
 
 .menu__content {
@@ -201,8 +201,8 @@ export default {
   display: block;
   width: 20px;
   height: 18px;
-  mask-image: url("assets/images/icons/arrow.svg");
-  -webkit-mask-image: url("assets/images/icons/arrow.svg");
+  mask-image: url("static/images/icons/arrow.svg");
+  -webkit-mask-image: url("static/images/icons/arrow.svg");
   mask-size: contain;
   -webkit-mask-size: contain;
   mask-position: center;

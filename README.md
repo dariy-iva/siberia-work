@@ -2,7 +2,7 @@
 
 [Ссылка на проект на Versel](https://siberia-work.vercel.app/)
 
-<img src="./static/promo.webp" alt="promo_img" />
+<img src="static/images/promo.webp" alt="promo_img" />
 
 ## Описание задания
 

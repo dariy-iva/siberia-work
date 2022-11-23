@@ -78,7 +78,7 @@ export default {
 
 .content {
   position: relative;
-  padding: calc(22px + 141px) 0 60px;
+  padding: calc(22px + 135px) 0 60px;
   flex-grow: 1;
 }
 

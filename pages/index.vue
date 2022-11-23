@@ -149,6 +149,7 @@ export default {
   font-weight: 500;
   font-size: 16px;
   line-height: 1.62;
+  letter-spacing: .5px;
 }
 
 .filter__title.news__city-title {

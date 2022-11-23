@@ -34,6 +34,7 @@
 
 <script>
 import {toggleBodyOverflow} from "assets/utils/toggleBodyOverflow";
+import {mapGetters} from "vuex";
 
 export default {
   name: "SearchInput",
@@ -49,9 +50,19 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters({
+      menuIsOpen: 'menu/isOpen'
+    }),
+  },
+
   methods: {
     handleSearch() {
       this.searchValue = null;
+
+      if (this.menuIsOpen) {
+        this.$store.dispatch('menu/closeMenu');
+      }
     },
 
     openSearchInHeader() {

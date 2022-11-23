@@ -41,7 +41,8 @@
       >
         <label
           :class="`filter__option-label link-hover
-          ${selectedValue === item.label ? 'filter__option-label_checked' : ''}`">
+          ${selectedValue === item.label ? 'filter__option-label_checked' : ''}
+          ${isAbsolutePosition ? 'filter__option-label_type_with-checked-icon' : ''}`">
 
           <div
             v-if="hasIcon"

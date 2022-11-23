@@ -1,7 +1,7 @@
 <template>
-  <div :class="`filter ${containerClass}`">
+  <div :class="`filter ${containerClass || ''}`">
     <p
-      :class="`filter__title ${titleClass} ${!isDefaultOpen ? 'filter__title_active' : ''}`"
+      :class="`filter__title ${titleClass || ''} ${isAbsolutePosition ? 'filter__title_active' : ''}`"
       @click="toggleCollapse"
     >
       {{ title }}
@@ -9,15 +9,13 @@
       <span
         aria-label="collapse list"
         :class="`filter__collapse-icon
-        ${isDefaultOpen ? 'filter__collapse-icon_hidden' : ''}
+        ${isMainMenu ? 'filter__collapse-icon_in_main-menu' : ''}
         ${!isCollapsed ? 'filter__collapse-icon_active' : ''}`"
       />
     </p>
 
     <ul
-      :class="`filter__list
-      ${contentClass}
-      ${isCollapsed && !isDefaultOpen ? 'filter__list_hidden' : !isCollapsed ? 'filter__list_visible' : ''}`"
+      :class="listClass"
       :ref="`filter-list-${name}`"
     >
       <li v-if="name === 'cities'">
@@ -68,6 +66,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "FilterList",
 
@@ -80,27 +80,49 @@ export default {
     hasIcon: Boolean,
     defaultValue: String,
     filterItems: Array,
-    isDefaultOpen: Boolean,
-    isAbsolutePosition: Boolean
+    isAbsolutePosition: Boolean,
+    isAloneFilter: Boolean
   },
 
   data() {
     return {
-      isCollapsed: true,
-      selectedValue: this.defaultValue || null
+      isCollapsed: !this.isAloneFilter,
+      selectedValue: this.defaultValue || null,
+      isFirstCollapse: true
+    }
+  },
+
+  computed: {
+    ...mapGetters({
+      isMainMenu: 'menu/isMainMenu',
+    }),
+
+    contentElement() {
+      return this.$refs[`filter-list-${this.name}`];
+    },
+
+    listClass() {
+      let contentClass = `filter__list ${this.contentClass || ''}`;
+
+      if (this.isMainMenu) {
+        contentClass += ' ' + `${this.isCollapsed ? 'filter__list_in-main-menu_hidden' : 'filter__list_visible'}`
+      } else {
+        contentClass += ' ' + `${this.isCollapsed ? 'filter__list_hidden' : 'filter__list_visible'}`
+      }
+      return contentClass;
     }
   },
 
   methods: {
     toggleCollapse() {
-      this.isCollapsed = !this.isCollapsed;
+      if (!this.isMainMenu || window.innerWidth < 1024) {
+        this.isCollapsed = !this.isCollapsed;
 
-      const content = this.$refs[`filter-list-${this.name}`];
-
-      if (content.style.maxHeight) {
-        content.style.maxHeight = null;
-      } else {
-        content.style.maxHeight = content.scrollHeight + "px";
+        if (this.isCollapsed) {
+          this.contentElement.style.maxHeight = null;
+        } else {
+          this.contentElement.style.maxHeight = this.contentElement.scrollHeight + "px";
+        }
       }
     },
 
@@ -109,6 +131,13 @@ export default {
       if (!filterElement.contains(e.target) && this.isAbsolutePosition && !this.isCollapsed) {
         this.toggleCollapse();
       }
+    }
+  },
+
+  mounted() {
+    if (typeof document !== 'undefined' && this.isFirstCollapse && !this.isCollapsed) {
+      this.contentElement.style.maxHeight = this.contentElement.scrollHeight + "px";
+      this.isFirstCollapse = false;
     }
   },
 
@@ -154,7 +183,7 @@ export default {
   transition: rotate .3s;
 }
 
-.filter__collapse-icon_hidden {
+.filter__collapse-icon_in_main-menu {
   display: none;
 }
 
@@ -197,7 +226,6 @@ export default {
 
 .filter__option-label_checked::after {
   content: "";
-  /*display: inline-block;*/
   display: none;
   width: 24px;
   height: 12px;
@@ -310,18 +338,23 @@ export default {
     cursor: pointer;
   }
 
-  .filter__collapse-icon_hidden {
+  .filter__collapse-icon_in_main-menu {
     display: inline-block;
   }
 
   .filter__list {
-    overflow: hidden;
-    max-height: 0;
     gap: 12px;
   }
 
   .filter__list_visible {
     margin-top: 18px;
+  }
+
+  .filter__list_in-main-menu_hidden {
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
   }
 
   .filter__option-label_checked::after {

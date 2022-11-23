@@ -26,7 +26,7 @@
             :hasIcon="false"
             defaultValue="all"
             :filterItems="citiesList"
-            :isDefaultOpen="true"
+            :isAloneFilter="hasAloneFilter"
           />
 
           <FilterList
@@ -36,7 +36,7 @@
             name="categories"
             :hasIcon="true"
             :filterItems="categoriesList"
-            :isDefaultOpen="true"
+            :isAloneFilter="hasAloneFilter"
           />
 
           <nav v-if="isMainMenu">
@@ -101,6 +101,10 @@ export default {
       hasCategories: 'menu/hasCategories',
       citiesList: 'cities',
     }),
+
+    hasAloneFilter() {
+      return !this.hasCategories || !this.hasCities;
+    },
 
     navigationLinks() {
       return navigationLinksMenu;

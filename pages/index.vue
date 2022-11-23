@@ -14,7 +14,6 @@
         :hasIcon="false"
         defaultValue="all"
         :filterItems="citiesList"
-        :isDefaultOpen="false"
         :isAbsolutePosition="true"
       />
 
